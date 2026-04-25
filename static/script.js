@@ -1,4 +1,9 @@
 (() => {
+  // When running via GitHub Pages, set this to your deployed backend URL.
+  // e.g. 'https://pokescrape.onrender.com'
+  // Leave empty to use the same origin (local Flask server).
+  const API_BASE = window.POKESCRAPE_API || '';
+
   const form = document.getElementById('scrape-form');
   const urlInput = document.getElementById('url');
   const scrapeBtn = document.getElementById('scrape-btn');
@@ -70,7 +75,7 @@
     resultsEl.innerHTML = '<div class="empty">🌀 Scraping… don\'t pull the cartridge!</div>';
 
     try {
-      const resp = await fetch('/api/scrape', {
+      const resp = await fetch(`${API_BASE}/api/scrape`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

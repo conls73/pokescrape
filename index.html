@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokéScrape — Pokémon Card Product Scraper</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="static/style.css" />
+  <link rel="icon" type="image/svg+xml" href="static/favicon.svg" />
+</head>
+<body>
+  <div class="bg-pattern"></div>
+
+  <header class="hero">
+    <img src="static/logo.svg" alt="PokéScrape" class="logo" onerror="this.style.display='none'" />
+    <p class="tagline">Gotta scrape 'em all — Pokémon card product hunter</p>
+  </header>
+
+  <main class="card">
+    <form id="scrape-form" autocomplete="off">
+
+      <label class="field">
+        <span class="field-label">🔍 Site to scrape</span>
+        <input
+          id="url"
+          name="url"
+          type="text"
+          placeholder="https://example.com/pokemon-cards"
+          required
+        />
+      </label>
+
+      <div class="row">
+        <div class="field toggle-field">
+          <span class="field-label">📦 Output format</span>
+          <div class="toggle" role="radiogroup" aria-label="Output format">
+            <input type="radio" id="fmt-json" name="format" value="json" checked />
+            <label for="fmt-json">JSON</label>
+            <input type="radio" id="fmt-csv" name="format" value="csv" />
+            <label for="fmt-csv">CSV</label>
+          </div>
+        </div>
+
+        <div class="field dropdown-field">
+          <span class="field-label">🎴 Sets</span>
+          <div class="multi-select" id="sets-select">
+            <button type="button" class="multi-select-btn" id="sets-btn">
+              <span id="sets-summary">All sets selected</span>
+              <span class="chevron">▾</span>
+            </button>
+            <div class="multi-select-panel" id="sets-panel" hidden>
+              <div class="multi-select-actions">
+                <button type="button" data-action="all">Select all</button>
+                <button type="button" data-action="none">Clear</button>
+              </div>
+              <ul id="sets-list">
+                <li><label><input type="checkbox" name="sets" value="Sword &amp; Shield" checked /><span>Sword &amp; Shield</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Rebel Clash" checked /><span>Rebel Clash</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Darkness Ablaze" checked /><span>Darkness Ablaze</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Vivid Voltage" checked /><span>Vivid Voltage</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Battle Styles" checked /><span>Battle Styles</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Chilling Reign" checked /><span>Chilling Reign</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Evolving Skies" checked /><span>Evolving Skies</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Fusion Strike" checked /><span>Fusion Strike</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Brilliant Stars" checked /><span>Brilliant Stars</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Astral Radiance" checked /><span>Astral Radiance</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Lost Origin" checked /><span>Lost Origin</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Silver Tempest" checked /><span>Silver Tempest</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Surging Sparks" checked /><span>Surging Sparks</span></label></li>
+                <li><label><input type="checkbox" name="sets" value="Destined Rivals" checked /><span>Destined Rivals</span></label></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <span class="field-label">🧰 Product types</span>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="product_types" value="ETB Case" checked /><span>ETB Case</span></label>
+          <label class="chip"><input type="checkbox" name="product_types" value="Display Case" checked /><span>Display Case</span></label>
+          <label class="chip"><input type="checkbox" name="product_types" value="ETB" checked /><span>ETB</span></label>
+          <label class="chip"><input type="checkbox" name="product_types" value="Booster Box" checked /><span>Booster Box</span></label>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn-primary" id="scrape-btn">
+          <span class="pokeball-spin"></span>
+          Scrape!
+        </button>
+        <button type="button" class="btn-secondary" id="sheets-btn" disabled>
+          📊 Open in Google Sheets
+        </button>
+        <button type="button" class="btn-secondary" id="download-btn" disabled>
+          ⬇️ Download
+        </button>
+      </div>
+    </form>
+
+    <section id="results" class="results" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <p>Built for trainers • Not affiliated with Nintendo / The Pokémon Company</p>
+  </footer>
+
+  <script src="static/script.js"></script>
+</body>
+</html>
