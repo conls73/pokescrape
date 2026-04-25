@@ -319,22 +319,25 @@ def scrape_playwright(base_url: str, wanted_sets: set[str], wanted_types: set[st
 
     all_listings: dict[tuple[str, str], Listing] = {}
 
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
-        root_html = _pw_get_html(browser, base_url)
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            root_html = _pw_get_html(browser, base_url)
 
-        for l in find_listings_html(root_html, base_url, wanted_sets, wanted_types):
-            all_listings[(_norm(l.title), l.url)] = l
+            for l in find_listings_html(root_html, base_url, wanted_sets, wanted_types):
+                all_listings[(_norm(l.title), l.url)] = l
 
-        for sub_url in _discover_sub_pages(root_html, base_url):
-            try:
-                sub_html = _pw_get_html(browser, sub_url)
-                for l in find_listings_html(sub_html, sub_url, wanted_sets, wanted_types):
-                    all_listings[(_norm(l.title), l.url)] = l
-            except Exception:
-                continue
+            for sub_url in _discover_sub_pages(root_html, base_url):
+                try:
+                    sub_html = _pw_get_html(browser, sub_url)
+                    for l in find_listings_html(sub_html, sub_url, wanted_sets, wanted_types):
+                        all_listings[(_norm(l.title), l.url)] = l
+                except Exception:
+                    continue
 
-        browser.close()
+    except Exception:
+        # Browser binary not available (e.g. Render free tier) — skip silently
+        return []
 
     return list(all_listings.values())
 
