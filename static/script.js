@@ -170,14 +170,36 @@
   sheetsBtn.addEventListener('click', async () => {
     if (!lastResults.length) return;
     const csv = toCsv(lastResults);
+
+    let copied = false;
     try {
       await navigator.clipboard.writeText(csv);
-      sheetsBtn.textContent = '✅ Copied! Paste into the new sheet';
-      setTimeout(() => (sheetsBtn.innerHTML = '📊 Open in Google Sheets'), 3500);
-    } catch {
-      // ignore — open sheet anyway
+      copied = true;
+    } catch { /* fallback below */ }
+
+    // Show paste instructions overlay
+    const overlay = document.createElement('div');
+    overlay.className = 'sheets-overlay';
+    overlay.innerHTML = `
+      <div class="sheets-modal">
+        <div class="sheets-icon">📋</div>
+        <h3>${copied ? 'Data copied to clipboard!' : 'Almost there!'}</h3>
+        <p>A new Google Sheet is opening.<br>
+           ${copied
+             ? 'Once it loads, click cell <strong>A1</strong> and press <strong>Ctrl+V</strong> (or <strong>⌘V</strong> on Mac) to paste your data.'
+             : 'Please use the <strong>Download</strong> button instead, then import the CSV into Google Sheets.'
+           }
+        </p>
+        <button class="btn-primary" id="sheets-ok">Got it →</button>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('sheets-ok').addEventListener('click', () => overlay.remove());
+
+    if (copied) {
+      window.open('https://docs.google.com/spreadsheets/create', '_blank', 'noopener');
     }
-    window.open('https://docs.google.com/spreadsheets/create?usp=sheets_home', '_blank', 'noopener');
+
+    setTimeout(() => overlay.remove(), 15000);
   });
 
   // ---- Utils ----

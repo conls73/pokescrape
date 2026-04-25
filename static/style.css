@@ -396,6 +396,54 @@ td a:hover { text-decoration: underline; }
   color: #8b0d0d;
 }
 
+/* ----- Google Sheets overlay ----- */
+.sheets-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sheets-modal {
+  background: #fff;
+  border: 4px solid var(--poke-blue);
+  border-radius: 20px;
+  padding: 32px 36px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.3);
+}
+
+.sheets-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+}
+
+.sheets-modal h3 {
+  font-family: 'Bangers', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 1px;
+  color: var(--poke-blue-dark);
+  margin: 0 0 12px;
+}
+
+.sheets-modal p {
+  color: var(--poke-text);
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 20px;
+}
+
+.sheets-modal strong {
+  color: var(--poke-blue-dark);
+  background: var(--poke-yellow);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
 /* ----- URL Autocomplete ----- */
 .autocomplete-list {
   position: absolute;
