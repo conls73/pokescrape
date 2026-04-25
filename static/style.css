@@ -223,6 +223,12 @@ input[type="text"]:focus {
 
 .multi-select-panel li label:hover { background: #eef3ff; }
 
+.multi-select-panel li label em {
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--poke-muted);
+}
+
 input[type="checkbox"] {
   width: 18px;
   height: 18px;

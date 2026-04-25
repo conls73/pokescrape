@@ -56,11 +56,27 @@
                 <button type="button" data-action="none">Clear</button>
               </div>
               <ul id="sets-list">
+                {% set de_names = {
+                  "Sword & Shield": "Schwert & Schild",
+                  "Rebel Clash": "Clash der Rebellen",
+                  "Darkness Ablaze": "Flammende Finsternis",
+                  "Vivid Voltage": "Farbenschock",
+                  "Battle Styles": "Kampfstile",
+                  "Chilling Reign": "Schaurige Herrschaft",
+                  "Evolving Skies": "Drachenwandel",
+                  "Fusion Strike": "Fusionsangriff",
+                  "Brilliant Stars": "Strahlende Sterne",
+                  "Astral Radiance": "Astralglanz",
+                  "Lost Origin": "Verlorener Ursprung",
+                  "Silver Tempest": "Silberne Sturmwinde",
+                  "Surging Sparks": "Stürmische Funken",
+                  "Destined Rivals": "Ewige Rivalen"
+                } %}
                 {% for s in sets %}
                 <li>
                   <label>
                     <input type="checkbox" name="sets" value="{{ s }}" checked />
-                    <span>{{ s }}</span>
+                    <span>{{ s }}{% if s in de_names %} <em>· {{ de_names[s] }}</em>{% endif %}</span>
                   </label>
                 </li>
                 {% endfor %}
