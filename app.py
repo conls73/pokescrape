@@ -11,7 +11,11 @@ import requests
 from bs4 import BeautifulSoup
 from flask import Flask, Response, jsonify, render_template, request
 from flask_cors import CORS
-from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout, Browser
+try:
+    from playwright.sync_api import sync_playwright, TimeoutError as PWTimeout, Browser
+    PLAYWRIGHT_AVAILABLE = True
+except ImportError:
+    PLAYWRIGHT_AVAILABLE = False
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)
@@ -310,6 +314,9 @@ def _discover_sub_pages(html: str, base_url: str) -> list[str]:
 
 
 def scrape_playwright(base_url: str, wanted_sets: set[str], wanted_types: set[str]) -> list[Listing]:
+    if not PLAYWRIGHT_AVAILABLE:
+        return []
+
     all_listings: dict[tuple[str, str], Listing] = {}
 
     with sync_playwright() as p:

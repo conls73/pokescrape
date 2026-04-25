@@ -2,8 +2,8 @@ services:
   - type: web
     name: pokescrape
     runtime: python
-    buildCommand: pip install -r requirements.txt && python -m playwright install chromium --with-deps
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1
+    buildCommand: pip install flask==3.0.3 flask-cors==4.0.1 requests==2.32.3 beautifulsoup4==4.12.3 lxml==5.3.0 gunicorn==22.0.0
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --timeout 60 --workers 2
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
