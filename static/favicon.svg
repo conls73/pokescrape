@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22">
   <!-- Top half (red) -->
-  <path d="M 10,50 A 40,40 0 0,1 90,50 Z" fill="#e63030"/>
+  <path d="M 1,11 A 10,10 0 0,1 21,11 Z" fill="#cc0000"/>
   <!-- Bottom half (white) -->
-  <path d="M 10,50 A 40,40 0 0,0 90,50 Z" fill="#ffffff"/>
+  <path d="M 1,11 A 10,10 0 0,0 21,11 Z" fill="#ffffff"/>
   <!-- Outer ring -->
-  <circle cx="50" cy="50" r="40" fill="none" stroke="#1a1a1a" stroke-width="6"/>
+  <circle cx="11" cy="11" r="10" fill="none" stroke="#1a2240" stroke-width="2"/>
   <!-- Center band -->
-  <line x1="10" y1="50" x2="90" y2="50" stroke="#1a1a1a" stroke-width="6"/>
+  <line x1="1" y1="11" x2="21" y2="11" stroke="#1a2240" stroke-width="2"/>
   <!-- Center button outer -->
-  <circle cx="50" cy="50" r="12" fill="#1a1a1a"/>
+  <circle cx="11" cy="11" r="4" fill="#1a2240"/>
   <!-- Center button inner -->
-  <circle cx="50" cy="50" r="7" fill="#ffffff"/>
+  <circle cx="11" cy="11" r="2.5" fill="#ffffff"/>
 </svg>
