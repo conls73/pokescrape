@@ -1,4 +1,4 @@
-app = "app-purple-voice-882"
+app = "pokescrape"
 primary_region = "lhr"
 
 [build]
