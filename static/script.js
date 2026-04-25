@@ -211,4 +211,94 @@
   }
 
   updateSetsSummary();
+
+  // ---- URL Autocomplete ----
+  const KNOWN_SITES = [
+    'https://tcgviert.com/',
+    'https://business.cardsandtoys.de',
+    'https://godofcards.com/',
+    'https://kofuku.de/',
+    'https://games-island.eu/',
+    'https://www.bescards.com/de/',
+    'https://www.cardgameshop.be/',
+    'https://www.cardsplace.de/',
+    'https://flash-cards.be/',
+    'https://www.legendarycards.eu/',
+    'https://oppacards.com/',
+    'https://www.pokecardshop.be/',
+    'https://tradingcardgamestore.com/',
+    'https://rogerz.dk/en',
+    'https://tcgcompany.nl/',
+    'https://yonko-tcg.de/',
+    'https://tcg-trade.de/',
+    'https://pokegeodude.shop/',
+    'https://www.poke-plus.de/',
+    'https://www.lotticards.de/',
+    'https://www.crazycards.eu/',
+    'https://crispycards.de/',
+    'https://vinticards.com/',
+    'https://beamcardshop.com/',
+    'https://fabscards.at/',
+    'https://www.gate-to-the-games.de',
+    'https://cardcosmos.de/',
+    'https://www.card-corner.de/',
+    'https://tcgdaddyundsoehne.de/',
+    'https://traders-hub.shop/',
+    'https://beavercards.de/',
+    'https://shpnpokestore.de/',
+    'https://emeraldcardcave.de/',
+  ];
+
+  const autocompleteList = document.createElement('ul');
+  autocompleteList.className = 'autocomplete-list';
+  autocompleteList.hidden = true;
+  urlInput.parentNode.style.position = 'relative';
+  urlInput.parentNode.appendChild(autocompleteList);
+
+  urlInput.addEventListener('input', () => {
+    const val = urlInput.value.trim().toLowerCase();
+    autocompleteList.innerHTML = '';
+    if (!val) {
+      // show all when empty
+      KNOWN_SITES.forEach(addItem);
+      autocompleteList.hidden = false;
+    } else {
+      const matches = KNOWN_SITES.filter(s => s.toLowerCase().includes(val));
+      if (matches.length) {
+        matches.forEach(addItem);
+        autocompleteList.hidden = false;
+      } else {
+        autocompleteList.hidden = true;
+      }
+    }
+  });
+
+  urlInput.addEventListener('focus', () => {
+    if (!urlInput.value.trim()) {
+      autocompleteList.innerHTML = '';
+      KNOWN_SITES.forEach(addItem);
+      autocompleteList.hidden = false;
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!autocompleteList.contains(e.target) && e.target !== urlInput) {
+      autocompleteList.hidden = true;
+    }
+  });
+
+  urlInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') autocompleteList.hidden = true;
+  });
+
+  function addItem(site) {
+    const li = document.createElement('li');
+    li.textContent = site;
+    li.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      urlInput.value = site;
+      autocompleteList.hidden = true;
+    });
+    autocompleteList.appendChild(li);
+  }
 })();

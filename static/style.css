@@ -390,6 +390,41 @@ td a:hover { text-decoration: underline; }
   color: #8b0d0d;
 }
 
+/* ----- URL Autocomplete ----- */
+.autocomplete-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 3px solid var(--poke-blue);
+  border-radius: 14px;
+  z-index: 30;
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+}
+
+.autocomplete-list li {
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--poke-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.autocomplete-list li:hover {
+  background: var(--poke-yellow);
+  color: var(--poke-blue-dark);
+}
+
 footer {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
